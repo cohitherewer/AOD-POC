@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script>
+        window.requirejs.config({
+            enforceDefine: true,
+            paths: {
+                'SDK': './lib/SDK.min'
+            }
+        });
+        window.requirejs(['SDK'], function (SDK) {
+            if (typeof SDK !== 'undefined') {
+                console.log("SDK is defined. Trying to initialize...");
+                SDK.init();
+                SDK.ready(function() {
+                    console.log("SDK is ready");
+                    document.getElementById("name").innerText = SDK.getUser().name;
+                });
+            } else {
+                console.log('SDK is not defined');
+            }
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async="" defer></script>
+</head>
+<body>
+    <div id="content">
+        <h1>Click the button to change the background color!</h1>
+        <button id="changeColorButton">Change Color</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
